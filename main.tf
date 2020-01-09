@@ -67,9 +67,51 @@ resource "ibm_compute_ssh_key" "temp_public_key" {
 ##############################################################
 # Create Virtual Machine and install MongoDB
 ##############################################################
-resource "ibm_compute_vm_instance" "softlayer_virtual_guest" {
+resource "ibm_compute_vm_instance" "softlayer_virtual_guest1" {
   hostname                 = "${var.hostname}"
   os_reference_code        = "REDHAT_7_64"
+  domain                   = "cam.ibm.com"
+  datacenter               = "${var.datacenter}"
+  network_speed            = 10
+  hourly_billing           = true
+  private_network_only     = false
+  cores                    = 1
+  memory                   = 1024
+  disks                    = [25]
+  dedicated_acct_host_only = false
+  local_disk               = false
+  ssh_key_ids              = ["${ibm_compute_ssh_key.cam_public_key.id}", "${ibm_compute_ssh_key.temp_public_key.id}"]
+  tags                     = ["${module.camtags.tagslist}"]
+
+  # Specify the ssh connection
+  connection {
+    user        = "root"
+    private_key = "${tls_private_key.ssh.private_key_pem}"
+    host        = "${self.ipv4_address}"
+    bastion_host        = "${var.bastion_host}"
+    bastion_user        = "${var.bastion_user}"
+    bastion_private_key = "${ length(var.bastion_private_key) > 0 ? base64decode(var.bastion_private_key) : var.bastion_private_key}"
+    bastion_port        = "${var.bastion_port}"
+    bastion_host_key    = "${var.bastion_host_key}"
+    bastion_password    = "${var.bastion_password}"
+  }
+  # Execute the script remotely
+  provisioner "remote-exec" {
+    inline = [
+      "wget -v -O /tmp/CarbonBlackLinuxInstaller.tar.gz https://ibm.box.com/shared/static/22qwqbtbnnup3xdd1f0p6zwn7kq1qt99.gz; gzip -d /tmp/CarbonBlackLinuxInstaller.tar.gz ; tar -C /tmp -xvf /tmp/CarbonBlackLinuxInstaller.tar  ;  chmod +x /tmp/CarbonBlackClientSetup-linux-v6.2.2.10003.sh ; bash /tmp/CarbonBlackClientSetup-linux-v6.2.2.10003.sh",
+    ]
+  }
+}
+  output "RedHat_server_ip_address" {
+  value = "${ibm_compute_vm_instance.softlayer_virtual_guest1.ipv4_address}"
+}
+  
+  ##############################################################
+# Create Virtual Machine and install MongoDB
+##############################################################
+resource "ibm_compute_vm_instance" "softlayer_virtual_guest2" {
+  hostname                 = "${var.hostname}"
+  os_reference_code        = "CENTOS_7_64"
   domain                   = "cam.ibm.com"
   datacenter               = "${var.datacenter}"
   network_speed            = 10
@@ -106,6 +148,8 @@ resource "ibm_compute_vm_instance" "softlayer_virtual_guest" {
 #########################################################
 # Output
 #########################################################
-output "nodejs_server_ip_address" {
-  value = "${ibm_compute_vm_instance.softlayer_virtual_guest.ipv4_address}"
+
+output "CentOS_server_ip_address" {
+  value = "${ibm_compute_vm_instance.softlayer_virtual_guest2.ipv4_address}"
 }
+  

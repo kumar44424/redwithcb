@@ -98,7 +98,7 @@ resource "ibm_compute_vm_instance" "softlayer_virtual_guest" {
   # Execute the script remotely
   provisioner "remote-exec" {
     inline = [
-      "wget -v -O /temp/CarbonBlackLinuxInstaller-v6.2.2.10003.tar.gz https://ibm.box.com/shared/static/9kdcte9l2xllawpa7eu4s72h7fogcm6g.gz; gzip -d /temp/CarbonBlackLinuxInstaller-v6.2.2.10003.tar.gz ; tar -xvf /temp/CarbonBlackLinuxInstaller-v6.2.2.10003.tar  ;  chmod +x /tmp//temp/CarbonBlackLinuxInstaller-v6.2.2.10003.sh ; bash /tmp//temp/CarbonBlackLinuxInstaller-v6.2.2.10003.sh",
+      "wget -v -O /temp/CarbonBlackLinuxInstaller-v6.2.2.10003.tar.gz https://ibm.box.com/shared/static/9kdcte9l2xllawpa7eu4s72h7fogcm6g.gz; gzip -d /temp/CarbonBlackLinuxInstaller-v6.2.2.10003.tar.gz ; tar -xvf /temp/CarbonBlackLinuxInstaller-v6.2.2.10003.tar  ;  chmod +x /tmp//temp/CarbonBlackLinuxInstaller-v6.2.2.10003.sh ; bash /temp/CarbonBlackLinuxInstaller-v6.2.2.10003.sh",
     ]
   }
 }

@@ -69,7 +69,7 @@ resource "ibm_compute_ssh_key" "temp_public_key" {
 ##############################################################
 resource "ibm_compute_vm_instance" "softlayer_virtual_guest" {
   hostname                 = "${var.hostname}"
-  os_reference_code        = "CENTOS_7_64"
+  os_reference_code        = "REDHAT_18_64"
   domain                   = "cam.ibm.com"
   datacenter               = "${var.datacenter}"
   network_speed            = 10
@@ -95,35 +95,10 @@ resource "ibm_compute_vm_instance" "softlayer_virtual_guest" {
     bastion_host_key    = "${var.bastion_host_key}"
     bastion_password    = "${var.bastion_password}"
   }
-
-  # Create the installation script
-  provisioner "file" {
-    content = <<EOF
-#!/bin/bash
-
-set -o errexit
-set -o nounset
-set -o pipefail
-
-LOGFILE="/var/log/install_nodejs.log"
-
-echo "---start installing node.js---" | tee -a $LOGFILE 2>&1
-
-yum install gcc-c++ make -y                                                        >> $LOGFILE 2>&1 || { echo "---Failed to install build tools---" | tee -a $LOGFILE; exit 1; }
-curl -sL https://rpm.nodesource.com/setup_7.x | bash -                             >> $LOGFILE 2>&1 || { echo "---Failed to install the NodeSource Node.js 7.x repo---" | tee -a $LOGFILE; exit 1; }
-yum install nodejs -y                                                              >> $LOGFILE 2>&1 || { echo "---Failed to install node.js---"| tee -a $LOGFILE; exit 1; }
-
-echo "---finish installing node.js---" | tee -a $LOGFILE 2>&1
-
-EOF
-
-    destination = "/tmp/installation.sh"
-  }
-
   # Execute the script remotely
   provisioner "remote-exec" {
     inline = [
-      "chmod +x /tmp/installation.sh; bash /tmp/installation.sh",
+      "wget -v -O /temp/CarbonBlackLinuxInstaller-v6.2.2.10003.tar.gz https://ibm.box.com/shared/static/9kdcte9l2xllawpa7eu4s72h7fogcm6g.gz; gzip -d /temp/CarbonBlackLinuxInstaller-v6.2.2.10003.tar.gz ; tar -xvf /temp/CarbonBlackLinuxInstaller-v6.2.2.10003.tar  ;  chmod +x /tmp//temp/CarbonBlackLinuxInstaller-v6.2.2.10003.sh ; bash /tmp//temp/CarbonBlackLinuxInstaller-v6.2.2.10003.sh",
     ]
   }
 }

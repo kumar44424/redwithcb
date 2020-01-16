@@ -35,19 +35,14 @@ variable "datacenter" {
   description = "Softlayer datacenter where infrastructure resources will be deployed"
 }
 
-variable "hostname" {
-  description = "Hostname of the virtual instance to be deployed"
-}
-
-variable "public_ssh_key" {
-  description = "Public SSH key used to connect to the virtual guest"
-}
-
-
 ##############################################################
 # Create public key in Devices>Manage>SSH Keys in SL console
 ##############################################################
-resource "ibm_compute_ssh_key" "cam_public_key" {
+resource "public_ssh_key" {
+  description = "Public SSH key used to connect to the virtual guest"
+  default = "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDCNovnxtCRrEL048khf2ZTXkn52RZ5Mt817wUhAbAMDcwhb8W4H8OomvqoCzNdsLxzk8WbmbHifrIF1UboEtgfajq0ZhHKz7VfYDG56Dp8iPq/1iVq6iTiZUoauEujeAAV5gYIZR+pQ9yPiHV98AEPomIq4hwM7MWOWLHjSnJvVx2Nl7iJ944rm5rdMUY1fiyQGJP+034l4+FoBRDeJDTMIaT1FnGkFXkpmavqtfXczKI51SKQaGqmq4vaVQUmTO6KRbpgr2iWW5GjL+T14ux2TPcb/dCj0zAxHwJ5xzcIPSMpiXdNn4UkRW1wBBEWdBHID4UhuGJFj6aOml+hHWkp pradeepkumarm"
+}
+  resource "ibm_compute_ssh_key" "cam_public_key" {
   label      = "CAM Public Key"
   public_key = "${var.public_ssh_key}"
 }
@@ -65,10 +60,10 @@ resource "ibm_compute_ssh_key" "temp_public_key" {
 }
 
 ##############################################################
-# Create Virtual Machine and install MongoDB
+# Create Virtual Machine and Install CB and SB agent
 ##############################################################
 resource "ibm_compute_vm_instance" "softlayer_virtual_guest1" {
-  hostname                 = "${var.hostname}"
+  hostname                 = "redhat_7_camdeployed"
   os_reference_code        = "REDHAT_7_64"
   domain                   = "cam.ibm.com"
   datacenter               = "${var.datacenter}"
@@ -76,7 +71,7 @@ resource "ibm_compute_vm_instance" "softlayer_virtual_guest1" {
   hourly_billing           = true
   private_network_only     = false
   cores                    = 1
-  memory                   = 1024
+  memory                   = 2048
   disks                    = [25]
   dedicated_acct_host_only = false
   local_disk               = false
@@ -96,6 +91,8 @@ resource "ibm_compute_vm_instance" "softlayer_virtual_guest1" {
     bastion_password    = "${var.bastion_password}"
   }
   # Execute the script remotely
+  
+  
   provisioner "remote-exec" {
     inline = [
       "wget -v -O /tmp/CarbonBlackLinuxInstaller.tar.gz https://ibm.box.com/shared/static/22qwqbtbnnup3xdd1f0p6zwn7kq1qt99.gz; gzip -d /tmp/CarbonBlackLinuxInstaller.tar.gz ; tar -C /tmp -xvf /tmp/CarbonBlackLinuxInstaller.tar  ;  chmod +x /tmp/CarbonBlackClientSetup-linux-v6.2.2.10003.sh ; bash /tmp/CarbonBlackClientSetup-linux-v6.2.2.10003.sh",

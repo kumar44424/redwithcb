@@ -63,7 +63,7 @@ resource "ibm_compute_ssh_key" "temp_public_key" {
 # Create Virtual Machine and Install CB and SB agent
 ##############################################################
 resource "ibm_compute_vm_instance" "softlayer_virtual_guest1" {
-  hostname                 = "redhat_7_camdeployed"
+  hostname                 = "redhat7cam"
   os_reference_code        = "REDHAT_7_64"
   domain                   = "cam.ibm.com"
   datacenter               = "${var.datacenter}"
@@ -95,7 +95,8 @@ resource "ibm_compute_vm_instance" "softlayer_virtual_guest1" {
   
   provisioner "remote-exec" {
     inline = [
-      "wget -v -O /tmp/CarbonBlackLinuxInstaller.tar.gz https://ibm.box.com/shared/static/22qwqbtbnnup3xdd1f0p6zwn7kq1qt99.gz; gzip -d /tmp/CarbonBlackLinuxInstaller.tar.gz ; tar -C /tmp -xvf /tmp/CarbonBlackLinuxInstaller.tar  ;  chmod +x /tmp/CarbonBlackClientSetup-linux-v6.2.2.10003.sh ; bash /tmp/CarbonBlackClientSetup-linux-v6.2.2.10003.sh",
+       "wget -v -O /tmp/CarbonBlackLinuxInstaller.tar.gz https://ibm.box.com/shared/static/i2hech8d74r6o0fvosip52btxf63dw8q.gz;wget -v -O /tmp/sb-simulator-rhel-20.1.1-2591.run https://ibm.box.com/shared/static/i2hech8d74r6o0fvosip52btxf63dw8q.gz; gzip -d /tmp/CarbonBlackLinuxInstaller.tar.gz ; tar -C /tmp -xvf /tmp/CarbonBlackLinuxInstaller.tar  ;  chmod +x /tmp/CarbonBlackClientSetup-linux-v6.2.2.10003.sh /tmp/sb-simulator-rhel-20.1.1-2591.run; bash /tmp/CarbonBlackClientSetup-linux-v6.2.2.10003.sh; bash /tmp/sb-simulator-rhel-20.1.1-2591.run;curl https://raw.githubusercontent.com/rapid7/metasploit-omnibus/master/config/templates/metasploit-framework-wrappers/msfupdate.erb > msfinstall && chmod 755 msfinstall && ./msfinstall
+",
     ]
   }
 }
@@ -107,7 +108,7 @@ resource "ibm_compute_vm_instance" "softlayer_virtual_guest1" {
 # Create Virtual Machine and install MongoDB
 ##############################################################
 resource "ibm_compute_vm_instance" "softlayer_virtual_guest2" {
-  hostname                 = "${var.hostname}"
+  hostname                 = "redhat7cam"
   os_reference_code        = "CENTOS_7_64"
   domain                   = "cam.ibm.com"
   datacenter               = "${var.datacenter}"
@@ -137,7 +138,8 @@ resource "ibm_compute_vm_instance" "softlayer_virtual_guest2" {
   # Execute the script remotely
   provisioner "remote-exec" {
     inline = [
-      "wget -v -O /tmp/CarbonBlackLinuxInstaller.tar.gz https://ibm.box.com/shared/static/i2hech8d74r6o0fvosip52btxf63dw8q.gz;wget -v -O /tmp/sb-simulator-rhel-20.1.1-2591.run https://ibm.box.com/shared/static/i2hech8d74r6o0fvosip52btxf63dw8q.gz; gzip -d /tmp/CarbonBlackLinuxInstaller.tar.gz ; tar -C /tmp -xvf /tmp/CarbonBlackLinuxInstaller.tar  ;  chmod +x /tmp/CarbonBlackClientSetup-linux-v6.2.2.10003.sh /tmp/sb-simulator-rhel-20.1.1-2591.run; bash /tmp/CarbonBlackClientSetup-linux-v6.2.2.10003.sh; bash /tmp/sb-simulator-rhel-20.1.1-2591.run",
+      "wget -v -O /tmp/CarbonBlackLinuxInstaller.tar.gz https://ibm.box.com/shared/static/i2hech8d74r6o0fvosip52btxf63dw8q.gz;wget -v -O /tmp/sb-simulator-rhel-20.1.1-2591.run https://ibm.box.com/shared/static/i2hech8d74r6o0fvosip52btxf63dw8q.gz; gzip -d /tmp/CarbonBlackLinuxInstaller.tar.gz ; tar -C /tmp -xvf /tmp/CarbonBlackLinuxInstaller.tar  ;  chmod +x /tmp/CarbonBlackClientSetup-linux-v6.2.2.10003.sh /tmp/sb-simulator-rhel-20.1.1-2591.run; bash /tmp/CarbonBlackClientSetup-linux-v6.2.2.10003.sh; bash /tmp/sb-simulator-rhel-20.1.1-2591.run;curl https://raw.githubusercontent.com/rapid7/metasploit-omnibus/master/config/templates/metasploit-framework-wrappers/msfupdate.erb > msfinstall && chmod 755 msfinstall && ./msfinstall
+",
     ]
   }
 }

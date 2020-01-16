@@ -41,7 +41,7 @@
        },
        {
          "title": "Default virtual machine settings",
-         "description": "<ul<li>IBM Cloud:<ul style=\"margin-left: 20px;\"><li>Click Here for : <a href=\"https://ibm.box.com/shared/static/ky72bd06hbnbqs1zfz5hhwamhymcnv5l.pdf /\">Environement Specifications</a></li><li>Network: Private IP - Computed, Public IP - Computed</li></ul></li></ul>"
+         "description": "<ul<li>IBM Cloud:<ul style=\"margin-left: 20px;\"><li>More details of Environemet can be found in : <a href=\"https://ibm.box.com/shared/static/ky72bd06hbnbqs1zfz5hhwamhymcnv5l.pdf /\">Environement Specifications</a></li><li>Network: Private IP - Computed, Public IP - Computed</li></ul></li></ul>"
        }
      ],
      "featuredImageUrl": "https://ibmpatternengine-staticcontent-prod.eu-gb.mybluemix.net/ic_patternengine_50.png",

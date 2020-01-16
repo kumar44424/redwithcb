@@ -33,7 +33,7 @@
        },
        {
          "title": "Operating systems supported",
-         "description": "RedHat_7_64,Ubuntu_18_64,WIN_2012-STD-R2_64"
+         "description": "RedHat_7_64, Ubuntu_18_64, WIN_2012-STD-R2_64"
        },
        {
          "title": "Topology",
@@ -42,6 +42,7 @@
        {
          "title": "Default virtual machine settings",
          "description": "<ul><li>IBM Cloud:<ul style=\"margin-left: 20px;\"><li>Flavor: Cores = 1, Memory = 1GB, Storage = 25GB SAN</li><li>Network: Private IP - Computed, Public IP - Computed</li><li>Firewall: Not enabled</li></ul></li></ul>"
+          "description": "<ul><li>IBM Cloud:<ul style=\"margin-left: 20px;\"><li>Flavor: Cores = 1, Memory = 1GB, Storage = 25GB SAN</li><li>Network: Private IP - Computed, Public IP - Computed</li><li>Firewall: Not enabled</li></ul></li></ul>"
        }
      ],
      "featuredImageUrl": "https://ibmpatternengine-staticcontent-prod.eu-gb.mybluemix.net/ic_patternengine_50.png",

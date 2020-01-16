@@ -38,13 +38,13 @@ variable "datacenter" {
 ##############################################################
 # Create public key in Devices>Manage>SSH Keys in SL console
 ##############################################################
-resource "public_ssh_key" {
+resource "public_ssh_key" "cam_ssh"{
   description = "Public SSH key used to connect to the virtual guest"
   default = "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDCNovnxtCRrEL048khf2ZTXkn52RZ5Mt817wUhAbAMDcwhb8W4H8OomvqoCzNdsLxzk8WbmbHifrIF1UboEtgfajq0ZhHKz7VfYDG56Dp8iPq/1iVq6iTiZUoauEujeAAV5gYIZR+pQ9yPiHV98AEPomIq4hwM7MWOWLHjSnJvVx2Nl7iJ944rm5rdMUY1fiyQGJP+034l4+FoBRDeJDTMIaT1FnGkFXkpmavqtfXczKI51SKQaGqmq4vaVQUmTO6KRbpgr2iWW5GjL+T14ux2TPcb/dCj0zAxHwJ5xzcIPSMpiXdNn4UkRW1wBBEWdBHID4UhuGJFj6aOml+hHWkp pradeepkumarm"
 }
   resource "ibm_compute_ssh_key" "cam_public_key" {
   label      = "CAM Public Key"
-  public_key = "${var.public_ssh_key}"
+  public_key = "cam_ssh"
 }
 
 ##############################################################

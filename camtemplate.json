@@ -41,7 +41,7 @@
        },
        {
          "title": "Default virtual machine settings",
-         "description": "<ul<li>IBM Cloud:<ul style=\"margin-left: 20px;\"><li><a href=\"https://ibm.box.com/shared/static/hcbupgbsogb6ugtfs8x6b8khxklxv401.pptx/\">Environement Specification/</a></li><li> Cores = 1, Memory = 1GB, Storage = 25GB SAN</li><li>Network: Private IP - Computed, Public IP - Computed</li><li>Firewall: Not enabled</li></ul></li></ul>"
+         "description": "<ul<li>IBM Cloud:<ul style=\"margin-left: 20px;\"><li>Click Here for : <a href=\"https://ibm.box.com/shared/static/hcbupgbsogb6ugtfs8x6b8khxklxv401.pptx/\">Environement Specifications</a></li><li>Network: Private IP - Computed, Public IP - Computed</li></ul></li></ul>"
        }
      ],
      "featuredImageUrl": "https://ibmpatternengine-staticcontent-prod.eu-gb.mybluemix.net/ic_patternengine_50.png",

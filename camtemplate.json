@@ -33,7 +33,7 @@
        },
        {
          "title": "Operating systems supported",
-         "description": "RedHat_7_64","Ubuntu_18_64","WIN_2012-STD-R2_64"
+         "description": "RedHat_7_64,Ubuntu_18_64,WIN_2012-STD-R2_64"
        },
        {
          "title": "Topology",

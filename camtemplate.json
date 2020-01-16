@@ -1,6 +1,6 @@
 {
-   "name": "Single VM on IBM Cloud",
-   "description": "Single VM on IBM Cloud",
+   "name": "Template of Templates - IBM Cloud",
+   "description": "IBM Cloud",
    "version": "1.0",
    "imageUrl": "./assets/svg/IBM_WebSphere_Standalone.svg",
    "image": "tp_WAS_standalone.png",
@@ -23,9 +23,9 @@
      }
    },
    "metadata": {
-     "displayName": "Single VM",
+     "displayName": "Template of Templates - IBM Cloud",
      "providerDisplayName": "IBM",
-     "longDescription": "Deploys a single node in IBM Cloud.",
+     "longDescription": "Deploys 3 OPerating systems Windows, RHEL and Cent OS on IBM Cloud.",
      "bullets": [
        {
          "title": "Clouds",
@@ -33,11 +33,13 @@
        },
        {
          "title": "Operating systems supported",
-         "description": "IBM Cloud: CentOS 7"
+         "description": "RedHat_7_64",
+                        "Ubuntu_18_64",
+                        "WIN_2012-STD-R2_64""
        },
        {
          "title": "Topology",
-         "description": "IBM Cloud: 1 virtual machine"
+         "description": "IBM Cloud: 3 virtual machine"
        },
        {
          "title": "Default virtual machine settings",

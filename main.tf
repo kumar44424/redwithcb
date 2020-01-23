@@ -95,7 +95,7 @@ resource "ibm_compute_vm_instance" "softlayer_virtual_guest1" {
   
   provisioner "remote-exec" {
     inline = [
-    "wget -v -O /tmp/CarbonBlackLinuxInstaller.tar.gz https://ibm.box.com/shared/static/i2hech8d74r6o0fvosip52btxf63dw8q.gz;wget -v -O /tmp/sb-simulator-rhel-20.1.1-2591.run https://ibm.box.com/shared/static/i2hech8d74r6o0fvosip52btxf63dw8q.gz; gzip -d /tmp/CarbonBlackLinuxInstaller.tar.gz ; tar -C /tmp -xvf /tmp/CarbonBlackLinuxInstaller.tar  ;  chmod +x /tmp/CarbonBlackClientSetup-linux-v6.2.2.10003.sh /tmp/sb-simulator-rhel-20.1.1-2591.run; bash /tmp/CarbonBlackClientSetup-linux-v6.2.2.10003.sh; /tmp/sb-simulator-rhel-20.1.1-2591.run; yum install nmap",
+    "wget -v -O /tmp/CarbonBlackLinuxInstaller.tar.gz https://ibm.box.com/shared/static/i2hech8d74r6o0fvosip52btxf63dw8q.gz;wget -v -O /tmp/sb-simulator-rhel-20.1.1-2591.run https://ibm.box.com/shared/static/i2hech8d74r6o0fvosip52btxf63dw8q.gz; gzip -d /tmp/CarbonBlackLinuxInstaller.tar.gz ; tar -C /tmp -xvf /tmp/CarbonBlackLinuxInstaller.tar  ;  chmod +x /tmp/CarbonBlackClientSetup-linux-v6.2.2.10003.sh /tmp/sb-simulator-rhel-20.1.1-2591.run; bash /tmp/CarbonBlackClientSetup-linux-v6.2.2.10003.sh; /tmp/sb-simulator-rhel-20.1.1-2591.run; echo yes | yum install nmap",
     ]
   }
 }

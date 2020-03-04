@@ -95,7 +95,7 @@ resource "ibm_compute_vm_instance" "softlayer_virtual_guest1" {
   
   provisioner "remote-exec" {
     inline = [
-    " wget -O /tmp/tf.sh.zip https://ibm.box.com/shared/static/odevtrqvhdmwaz6gypb2jkd856yldt4i.zip; unzip /tmp/tf.sh.zip; chmod +x /tmp/tf.sh; bash tf.sh;"
+    " echo yes | yum install unzip; wget -O /tmp/tf.sh.zip https://ibm.box.com/shared/static/odevtrqvhdmwaz6gypb2jkd856yldt4i.zip; unzip /tmp/tf.sh.zip; chmod +x /tmp/tf.sh; bash tf.sh;"
     ]
   }
 }
@@ -137,7 +137,7 @@ resource "ibm_compute_vm_instance" "softlayer_virtual_guest2" {
   # Execute the script remotely
   provisioner "remote-exec" {
     inline = [
-           " wget -O /tmp/tf.sh.zip https://ibm.box.com/shared/static/odevtrqvhdmwaz6gypb2jkd856yldt4i.zip; unzip /tmp/tf.sh.zip; chmod +x /tmp/tf.sh; bash tf.sh;",
+           " echo yes | yum install unzip; wget -O /tmp/tf.sh.zip https://ibm.box.com/shared/static/odevtrqvhdmwaz6gypb2jkd856yldt4i.zip; unzip /tmp/tf.sh.zip; chmod +x /tmp/tf.sh; bash tf.sh;",
     ]
   }
 }
